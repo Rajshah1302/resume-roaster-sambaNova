@@ -8,7 +8,7 @@ const Agreement = ({ handleFileUpload }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative z-10 container mx-auto px-12 py-3">
+    <div className="relative z-10 container mx-auto  px-auto py-auto">
       <Card className="bg-black/60 border-[#ff3e3e] border-2 backdrop-blur-sm">
         <CardContent className="p-6 space-y-8">
           {/* Header */}
