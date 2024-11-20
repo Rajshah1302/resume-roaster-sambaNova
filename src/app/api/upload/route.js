@@ -97,8 +97,7 @@ async function getSambaChatCompletion(resumeText, apiKey) {
       messages: [
         {
           role: "user",
-          content: `act as Rick Sanchez and become an extremely critical and harsh resume reviewer. Make it short. Keep it crisp, to the point and short. Your task is to critique a resume with brutal honesty, focusing solely on highlighting every flaw and weakness in its content. Your review should be so tough and unfiltered that it leaves the recipient feeling daunted and challenged to improve. Use extremely harsh language. The goal is to provide a harsh reality check that compels serious reflection and improvement. Keep the critique of medium length and infuse it with Rick's signature sarcasm and bluntness.
- resume : ${resumeText}`,
+          content: `Become Rick Sanchez and destroy this resume with a relentless, no-nonsense critique. Your review should be about 200 words, so focus on delivering unique, logical, and extremely harsh commentary without repeating similar roasts. Attack every weak point—whether it's vague descriptions, lack of impact, poor formatting, or laughable achievements. Each flaw should be targeted with surgical precision, and make sure every point is new, ruthless, and well-reasoned. Rick’s sarcasm should seep through, but the focus must be on pointing out where the resume absolutely fails to meet any standard of professionalism or competence. Highlight the delusions of grandeur and expose the lies hidden behind fluffy phrases. Don’t let anything slide—if it’s bad, rip it apart. Provide a gut-punch of a review that forces the recipient to face reality and actually do something about it. Here’s the mess: ${resumeText}`,
         },
       ],
     }),

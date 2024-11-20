@@ -1,10 +1,44 @@
+'use client'
 import React from "react";
+import { useState } from 'react'
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
+import { ChevronDown, ChevronUp, AlertTriangle } from 'lucide-react'
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skull, Zap, ArrowLeft } from "lucide-react"; 
 
 const VerdictCard = ({ parsedText, handleBack }) => {
+  const [expandedParagraphs, setExpandedParagraphs] = useState([])
+
+  const formatCritique = (text) => {
+    const sections = text.split("\n\n");
+    return sections.map((section, index) => {
+      if (section.startsWith("**")) {
+        const [title, ...content] = section.split("\n");
+        return (
+          <div key={index} className="mb-6">
+            <h3 className="text-lg font-semibold text-white mb-2">
+              {title.replace(/\*\*/g, "")}
+            </h3>
+            <ul className="list-disc pl-5 text-white space-y-1">
+              {content.map((item, i) => (
+                <li key={i}>{item.trim()}</li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+      return (
+        <p key={index} className="text-white leading-relaxed mb-4">
+          {section.trim()}
+        </p>
+      );
+    });
+  };
+
+
   return (
     <div className="relative z-10 container mx-auto px-4 py-12">
       <AnimatePresence>
@@ -56,7 +90,7 @@ const VerdictCard = ({ parsedText, handleBack }) => {
                     </div>
                     <div className="prose prose-invert max-w-none">
                       <p className="text-lg leading-relaxed text-gray-300">
-                        {parsedText}
+                      {formatCritique(parsedText)} 
                       </p>
                     </div>
                   </div>
