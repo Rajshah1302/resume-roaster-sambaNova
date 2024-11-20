@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import PDFParser from "pdf2json";
 import { storage } from "@/app/firebase.config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Import required functions
-import prompts from "../../../config/promts.json"
+import prompts from "../../../config/promts.json";
 
 export async function POST(req) {
   const formData = await req.formData();
@@ -15,7 +15,7 @@ export async function POST(req) {
 
     if (uploadedFile instanceof File) {
       let fileName = uploadedFile.name;
-      fileName = fileName.replace(/\.[^/.]+$/, ""); 
+      fileName = fileName.replace(/\.[^/.]+$/, "");
       const fileBuffer = Buffer.from(await uploadedFile.arrayBuffer());
 
       const fileRef = ref(storage, `resumes/${fileName}.pdf`);
@@ -97,7 +97,11 @@ async function getSambaChatCompletion(resumeText, apiKey) {
       messages: [
         {
           role: "user",
-          content: `${prompts.rickResumeCritique.description} ${prompts.rickResumeCritique.example} resume : ${resumeText}`,
+          content: `act as Rick Sanchez and become an extremely critical and harsh resume reviewer. Make it short. Keep it crisp, to the point and short. Your task is to critique a resume with brutal honesty, focusing solely on highlighting every flaw and weakness in its content. Your review should be so tough and unfiltered that it leaves the recipient feeling daunted and challenged to improve. Use extremely harsh language. The goal is to provide a harsh reality check that compels serious reflection and improvement. Keep the critique of medium length and infuse it with Rick's signature sarcasm and bluntness.
+
+Example of the tone and style to use:
+
+"[name], listen up, because I'm about to be brutally honest. This resume is like a bad Bollywood movie: full of dramatic flair but lacking substance. You've got more achievements listed than a Kardashian Christmas card, but they're so generic they might as well be written in Comic Sans. 'Won a hackathon,' 'Developed an NFT marketplace,' 'Secured third place,' - we've heard it all before. And 'Youngest App Developer Award at the age of 13?' That's like bragging about being the shortest person at a midget convention. Your 'Skills' section reads like a tech jargon bingo card, and your 'Experience' is a list of projects that sound like they were coded in Notepad. Listen, you're a 'communication and computer engineer,' so communicate what makes you unique! Show, don't tell. Give me a resume that screams, 'Hire me, I'm a coding ninja!' Otherwise, you'll be stuck teaching data structures and algorithms to a class full of bored students, and believe me, that's a fate worse than a bad Bollywood movie." resume : ${resumeText}`,
         },
       ],
     }),
